@@ -16,8 +16,8 @@ all: clean
 			--proto_path=vendor/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 			api/*.proto --swagger_out=logtostderr=true:.
 
-	swagger expand api/*.swagger.json > api/expanded.swagger.json
-	swagger mixin api/api.json api/expanded.swagger.json > api/swagger.json
+	swagger flatten --with-flatten=expand api/*.swagger.json > api/flattened.swagger.json
+	swagger mixin api/api.json api/flattened.swagger.json > api/swagger.json
 	swagger validate api/swagger.json
 
 	go install -v ./...
