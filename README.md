@@ -16,7 +16,7 @@ github.com/go-openapi/inflect           branch master  branch master  16a898e   
 github.com/go-openapi/jsonpointer       v0.18.0        v0.18.0        ef5f0af   v0.18.0  1
 github.com/go-openapi/jsonreference     v0.18.0        v0.18.0        8483a88   v0.18.0  1
 github.com/go-openapi/loads             branch master  branch master  7462858   7462858  2
-github.com/go-openapi/runtime           branch master  branch master  41e24cc   41e24cc  7
+github.com/go-openapi/runtime           branch master  branch master  41e24cc   41e24cc  8
 github.com/go-openapi/spec              branch master  branch master  5b6cdde   5b6cdde  1
 github.com/go-openapi/strfmt            branch master  branch master  e471370   e471370  1
 github.com/go-openapi/swag              branch master  branch master  1d29f06   1d29f06  1

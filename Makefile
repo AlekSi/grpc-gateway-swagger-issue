@@ -20,7 +20,11 @@ all: clean
 	swagger mixin api/api.json api/flattened.swagger.json > api/swagger.json
 	swagger validate api/swagger.json
 
+	swagger generate client --spec=api/swagger.json --target=api/swagger
+
 	go install -v ./...
 
 clean:
 	rm -f api/*.pb.go api/*.pb.gw.go api/*.swagger.json api/swagger.json
+	rm -fr api/swagger
+	mkdir api/swagger
