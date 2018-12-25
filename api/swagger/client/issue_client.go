@@ -15,7 +15,7 @@ import (
 	"github.com/AlekSi/grpc-gateway-swagger-issue/api/swagger/client/baz_service"
 )
 
-// Default g RPC gateway swagger issue demo HTTP client.
+// Default issue HTTP client.
 var Default = NewHTTPClient(nil)
 
 const (
@@ -30,14 +30,14 @@ const (
 // DefaultSchemes are the default schemes found in Meta (info) section of spec file
 var DefaultSchemes = []string{"http", "https"}
 
-// NewHTTPClient creates a new g RPC gateway swagger issue demo HTTP client.
-func NewHTTPClient(formats strfmt.Registry) *GRPCGatewaySwaggerIssueDemo {
+// NewHTTPClient creates a new issue HTTP client.
+func NewHTTPClient(formats strfmt.Registry) *Issue {
 	return NewHTTPClientWithConfig(formats, nil)
 }
 
-// NewHTTPClientWithConfig creates a new g RPC gateway swagger issue demo HTTP client,
+// NewHTTPClientWithConfig creates a new issue HTTP client,
 // using a customizable transport config.
-func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *GRPCGatewaySwaggerIssueDemo {
+func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Issue {
 	// ensure nullable parameters have default
 	if cfg == nil {
 		cfg = DefaultTransportConfig()
@@ -48,14 +48,14 @@ func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *GRP
 	return New(transport, formats)
 }
 
-// New creates a new g RPC gateway swagger issue demo client
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *GRPCGatewaySwaggerIssueDemo {
+// New creates a new issue client
+func New(transport runtime.ClientTransport, formats strfmt.Registry) *Issue {
 	// ensure nullable parameters have default
 	if formats == nil {
 		formats = strfmt.Default
 	}
 
-	cli := new(GRPCGatewaySwaggerIssueDemo)
+	cli := new(Issue)
 	cli.Transport = transport
 
 	cli.BarService = bar_service.New(transport, formats)
@@ -104,8 +104,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 	return cfg
 }
 
-// GRPCGatewaySwaggerIssueDemo is a client for g RPC gateway swagger issue demo
-type GRPCGatewaySwaggerIssueDemo struct {
+// Issue is a client for issue
+type Issue struct {
 	BarService *bar_service.Client
 
 	BazService *baz_service.Client
@@ -114,7 +114,7 @@ type GRPCGatewaySwaggerIssueDemo struct {
 }
 
 // SetTransport changes the transport on the client and all its subresources
-func (c *GRPCGatewaySwaggerIssueDemo) SetTransport(transport runtime.ClientTransport) {
+func (c *Issue) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 
 	c.BarService.SetTransport(transport)

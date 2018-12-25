@@ -17,7 +17,7 @@ import (
 type APIBarRequest struct {
 
 	// common
-	Common *APICommon `json:"common,omitempty"`
+	Common *APIBarRequestCommon `json:"common,omitempty"`
 }
 
 // Validate validates this api bar request
@@ -63,6 +63,37 @@ func (m *APIBarRequest) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *APIBarRequest) UnmarshalBinary(b []byte) error {
 	var res APIBarRequest
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// APIBarRequestCommon API bar request common
+// swagger:model APIBarRequestCommon
+type APIBarRequestCommon struct {
+
+	// id
+	ID string `json:"id,omitempty"`
+}
+
+// Validate validates this API bar request common
+func (m *APIBarRequestCommon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *APIBarRequestCommon) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *APIBarRequestCommon) UnmarshalBinary(b []byte) error {
+	var res APIBarRequestCommon
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

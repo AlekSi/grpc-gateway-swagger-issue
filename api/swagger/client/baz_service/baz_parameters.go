@@ -15,8 +15,6 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/AlekSi/grpc-gateway-swagger-issue/api/swagger/models"
 )
 
 // NewBazParams creates a new BazParams object
@@ -64,7 +62,7 @@ for the baz operation typically these are written to a http.Request
 type BazParams struct {
 
 	/*Body*/
-	Body models.APIBazRequest
+	Body interface{}
 
 	timeout    time.Duration
 	Context    context.Context
@@ -105,13 +103,13 @@ func (o *BazParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the baz params
-func (o *BazParams) WithBody(body models.APIBazRequest) *BazParams {
+func (o *BazParams) WithBody(body interface{}) *BazParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the baz params
-func (o *BazParams) SetBody(body models.APIBazRequest) {
+func (o *BazParams) SetBody(body interface{}) {
 	o.Body = body
 }
 

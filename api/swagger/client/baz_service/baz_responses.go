@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/swag"
 
 	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/AlekSi/grpc-gateway-swagger-issue/api/swagger/models"
 )
 
 // BazReader is a Reader for the Baz structure.
@@ -47,7 +46,7 @@ func NewBazOK() *BazOK {
 A successful response.
 */
 type BazOK struct {
-	Payload *models.APIBazResponse
+	Payload *BazOKBody
 }
 
 func (o *BazOK) Error() string {
@@ -56,12 +55,44 @@ func (o *BazOK) Error() string {
 
 func (o *BazOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIBazResponse)
+	o.Payload = new(BazOKBody)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
+	return nil
+}
+
+/*BazOKBody baz o k body
+swagger:model BazOKBody
+*/
+type BazOKBody struct {
+
+	// something
+	Something string `json:"something,omitempty"`
+}
+
+// Validate validates this baz o k body
+func (o *BazOKBody) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *BazOKBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *BazOKBody) UnmarshalBinary(b []byte) error {
+	var res BazOKBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
 	return nil
 }
