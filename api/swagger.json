@@ -1,0 +1,93 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "gRPC Gateway Swagger issue demo",
+    "version": "version 1"
+  },
+  "paths": {
+    "/Bar": {
+      "post": {
+        "tags": [
+          "BarService"
+        ],
+        "operationId": "Bar",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiBarRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiBarResponse"
+            }
+          }
+        }
+      }
+    },
+    "/Baz": {
+      "post": {
+        "tags": [
+          "BazService"
+        ],
+        "operationId": "Baz",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiBazRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiBazResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "apiBarRequest": {
+      "type": "object",
+      "properties": {
+        "common": {
+          "$ref": "#/definitions/apiCommon"
+        }
+      }
+    },
+    "apiBarResponse": {
+      "type": "object"
+    },
+    "apiBazRequest": {
+      "type": "object"
+    },
+    "apiBazResponse": {
+      "type": "object"
+    },
+    "apiCommon": {
+      "type": "object"
+    }
+  }
+}

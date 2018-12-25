@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package api;
+
+import "google/api/annotations.proto";
+import "api/common.proto";
+
+message BarRequest {
+  Common common = 1;
+}
+
+message BarResponse {}
+
+service BarService {
+  rpc Bar(BarRequest) returns (BarResponse)  {
+    option (google.api.http) = {
+      post: "/Bar"
+      body: "*"
+    };
+  }
+}

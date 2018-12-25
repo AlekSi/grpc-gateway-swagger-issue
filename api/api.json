@@ -1,0 +1,7 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "gRPC Gateway Swagger issue demo",
+    "version": "version 1"
+  }
+}
