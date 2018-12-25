@@ -51,31 +51,5 @@
         }
       }
     }
-  },
-  "definitions": {
-    "apiBarRequest": {
-      "type": "object",
-      "properties": {
-        "common": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "apiBarResponse": {
-      "type": "object"
-    },
-    "apiCommon": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      }
-    }
   }
 }

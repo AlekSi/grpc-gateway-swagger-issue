@@ -16,7 +16,7 @@ all: clean
 			--proto_path=vendor/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 			api/*.proto --swagger_out=logtostderr=true:.
 
-	swagger flatten --with-flatten=expand api/*.swagger.json > api/flattened.swagger.json
+	swagger flatten --with-flatten=expand --with-flatten=verbose --with-flatten=remove-unused api/*.swagger.json > api/flattened.swagger.json
 	swagger mixin api/api.json api/flattened.swagger.json > api/swagger.json
 	swagger validate api/swagger.json
 
