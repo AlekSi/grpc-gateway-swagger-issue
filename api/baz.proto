@@ -9,7 +9,9 @@ message BazRequest {
   Common common = 1;
 }
 
-message BazResponse {}
+message BazResponse {
+  string something = 1;
+}
 
 service BazService {
   rpc Baz(BazRequest) returns (BazResponse)  {

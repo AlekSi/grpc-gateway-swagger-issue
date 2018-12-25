@@ -52,7 +52,12 @@
       }
     },
     "apiBazResponse": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "something": {
+          "type": "string"
+        }
+      }
     },
     "apiCommon": {
       "type": "object",
