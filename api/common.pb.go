@@ -19,6 +19,7 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type Common struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -28,7 +29,7 @@ func (m *Common) Reset()         { *m = Common{} }
 func (m *Common) String() string { return proto.CompactTextString(m) }
 func (*Common) ProtoMessage()    {}
 func (*Common) Descriptor() ([]byte, []int) {
-	return fileDescriptor_common_384b470304ebbbc4, []int{0}
+	return fileDescriptor_common_4c51c39df663318e, []int{0}
 }
 func (m *Common) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Common.Unmarshal(m, b)
@@ -48,16 +49,24 @@ func (m *Common) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Common proto.InternalMessageInfo
 
+func (m *Common) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*Common)(nil), "api.Common")
 }
 
-func init() { proto.RegisterFile("api/common.proto", fileDescriptor_common_384b470304ebbbc4) }
+func init() { proto.RegisterFile("api/common.proto", fileDescriptor_common_4c51c39df663318e) }
 
-var fileDescriptor_common_384b470304ebbbc4 = []byte{
-	// 59 bytes of a gzipped FileDescriptorProto
+var fileDescriptor_common_4c51c39df663318e = []byte{
+	// 75 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x48, 0x2c, 0xc8, 0xd4,
 	0x4f, 0xce, 0xcf, 0xcd, 0xcd, 0xcf, 0xd3, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x4e, 0x2c,
-	0xc8, 0x54, 0xe2, 0xe0, 0x62, 0x73, 0x06, 0x0b, 0x26, 0xb1, 0x81, 0x45, 0x8d, 0x01, 0x01, 0x00,
-	0x00, 0xff, 0xff, 0x8f, 0x74, 0xe3, 0xfe, 0x29, 0x00, 0x00, 0x00,
+	0xc8, 0x54, 0x92, 0xe0, 0x62, 0x73, 0x06, 0x0b, 0x0a, 0xf1, 0x71, 0x31, 0x65, 0xa6, 0x48, 0x30,
+	0x2a, 0x30, 0x6a, 0x70, 0x06, 0x31, 0x65, 0xa6, 0x24, 0xb1, 0x81, 0x55, 0x19, 0x03, 0x02, 0x00,
+	0x00, 0xff, 0xff, 0x54, 0x6b, 0x22, 0x3e, 0x39, 0x00, 0x00, 0x00,
 }

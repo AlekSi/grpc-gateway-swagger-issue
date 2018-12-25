@@ -8,6 +8,7 @@ package models
 import (
 	strfmt "github.com/go-openapi/strfmt"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
 )
 
@@ -16,11 +17,38 @@ import (
 type APIBarRequest struct {
 
 	// common
-	Common interface{} `json:"common,omitempty"`
+	Common *APIBarRequestCommon `json:"common,omitempty"`
 }
 
 // Validate validates this api bar request
 func (m *APIBarRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateCommon(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *APIBarRequest) validateCommon(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Common) { // not required
+		return nil
+	}
+
+	if m.Common != nil {
+		if err := m.Common.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("common")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -35,6 +63,37 @@ func (m *APIBarRequest) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *APIBarRequest) UnmarshalBinary(b []byte) error {
 	var res APIBarRequest
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// APIBarRequestCommon API bar request common
+// swagger:model APIBarRequestCommon
+type APIBarRequestCommon struct {
+
+	// id
+	ID string `json:"id,omitempty"`
+}
+
+// Validate validates this API bar request common
+func (m *APIBarRequestCommon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *APIBarRequestCommon) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *APIBarRequestCommon) UnmarshalBinary(b []byte) error {
+	var res APIBarRequestCommon
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

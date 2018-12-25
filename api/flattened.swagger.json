@@ -30,7 +30,12 @@
               "type": "object",
               "properties": {
                 "common": {
-                  "type": "object"
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -52,7 +57,12 @@
       "type": "object",
       "properties": {
         "common": {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -60,7 +70,12 @@
       "type": "object"
     },
     "apiCommon": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
     }
   }
 }

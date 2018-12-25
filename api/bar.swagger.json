@@ -55,7 +55,12 @@
       "type": "object"
     },
     "apiCommon": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
     }
   }
 }

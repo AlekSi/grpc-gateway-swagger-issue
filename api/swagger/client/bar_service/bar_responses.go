@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/swag"
 
@@ -69,11 +70,38 @@ swagger:model BarBody
 type BarBody struct {
 
 	// common
-	Common interface{} `json:"common,omitempty"`
+	Common *BarParamsBodyCommon `json:"common,omitempty"`
 }
 
 // Validate validates this bar body
 func (o *BarBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateCommon(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *BarBody) validateCommon(formats strfmt.Registry) error {
+
+	if swag.IsZero(o.Common) { // not required
+		return nil
+	}
+
+	if o.Common != nil {
+		if err := o.Common.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "common")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -88,6 +116,38 @@ func (o *BarBody) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (o *BarBody) UnmarshalBinary(b []byte) error {
 	var res BarBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*BarParamsBodyCommon bar params body common
+swagger:model BarParamsBodyCommon
+*/
+type BarParamsBodyCommon struct {
+
+	// id
+	ID string `json:"id,omitempty"`
+}
+
+// Validate validates this bar params body common
+func (o *BarParamsBodyCommon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *BarParamsBodyCommon) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *BarParamsBodyCommon) UnmarshalBinary(b []byte) error {
+	var res BarParamsBodyCommon
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
