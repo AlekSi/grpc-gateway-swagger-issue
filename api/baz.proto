@@ -3,10 +3,10 @@ syntax = "proto3";
 package api;
 
 import "google/api/annotations.proto";
-// import "api/common.proto";
+import "api/common.proto";
 
 message BazRequest {
-  // Common common = 1;
+  Common common = 1;
 }
 
 message BazResponse {}

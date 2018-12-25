@@ -81,7 +81,12 @@
       "type": "object"
     },
     "apiBazRequest": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "common": {
+          "$ref": "#/definitions/apiCommon"
+        }
+      }
     },
     "apiBazResponse": {
       "type": "object"

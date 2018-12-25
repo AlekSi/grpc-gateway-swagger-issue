@@ -48,3 +48,28 @@ google.golang.org/genproto              383e8b2                       383e8b2   
 google.golang.org/grpc                  v1.17.0        v1.17.0        df01485   v1.17.0  31
 gopkg.in/yaml.v2                        branch v2      branch v2      51d6538   51d6538  1
 ```
+
+```
+$ make
+
+rm -f api/*.pb.go api/*.pb.gw.go api/*.swagger.json api/swagger.json
+go install -v ./vendor/github.com/golang/protobuf/protoc-gen-go
+go install -v ./vendor/github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
+go install -v ./vendor/github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
+go install -v ./vendor/github.com/go-swagger/go-swagger/cmd/swagger
+protoc --proto_path=. \
+			--proto_path=vendor/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+			api/*.proto --go_out=plugins=grpc:.
+protoc --proto_path=. \
+			--proto_path=vendor/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+			api/*.proto --grpc-gateway_out=logtostderr=true:.
+protoc --proto_path=. \
+			--proto_path=vendor/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+			api/*.proto --swagger_out=logtostderr=true:.
+swagger mixin api/api.json api/*.swagger.json > api/swagger.json
+2018/12/25 18:02:22 args[0] = api/api.json
+2018/12/25 18:02:22 args[1:] = [api/bar.swagger.json api/baz.swagger.json api/common.swagger.json]
+2018/12/25 18:02:22 definitions entry 'apiCommon' already exists in primary or higher priority mixin, skipping
+
+make: *** [all] Error 1
+```
