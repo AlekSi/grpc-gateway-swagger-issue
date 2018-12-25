@@ -44,25 +44,12 @@
   },
   "definitions": {
     "apiBazRequest": {
-      "type": "object",
-      "properties": {
-        "common": {
-          "$ref": "#/definitions/apiCommon"
-        }
-      }
+      "type": "object"
     },
     "apiBazResponse": {
       "type": "object",
       "properties": {
         "something": {
-          "type": "string"
-        }
-      }
-    },
-    "apiCommon": {
-      "type": "object",
-      "properties": {
-        "id": {
           "type": "string"
         }
       }

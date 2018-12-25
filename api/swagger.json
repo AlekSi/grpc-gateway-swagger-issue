@@ -27,17 +27,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "common": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
+              "$ref": "#/definitions/apiBarRequest"
             }
           }
         ],
@@ -45,9 +35,67 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/apiBarResponse"
             }
           }
+        }
+      }
+    },
+    "/Baz": {
+      "post": {
+        "tags": [
+          "BazService"
+        ],
+        "operationId": "Baz",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiBazRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiBazResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "apiBarRequest": {
+      "type": "object",
+      "properties": {
+        "common": {
+          "$ref": "#/definitions/apiCommon"
+        }
+      }
+    },
+    "apiBarResponse": {
+      "type": "object"
+    },
+    "apiBazRequest": {
+      "type": "object"
+    },
+    "apiBazResponse": {
+      "type": "object",
+      "properties": {
+        "something": {
+          "type": "string"
+        }
+      }
+    },
+    "apiCommon": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
         }
       }
     }

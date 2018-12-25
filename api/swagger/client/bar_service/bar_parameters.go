@@ -15,6 +15,8 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 
 	strfmt "github.com/go-openapi/strfmt"
+
+	models "github.com/AlekSi/grpc-gateway-swagger-issue/api/swagger/models"
 )
 
 // NewBarParams creates a new BarParams object
@@ -62,7 +64,7 @@ for the bar operation typically these are written to a http.Request
 type BarParams struct {
 
 	/*Body*/
-	Body BarBody
+	Body *models.APIBarRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -103,13 +105,13 @@ func (o *BarParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the bar params
-func (o *BarParams) WithBody(body BarBody) *BarParams {
+func (o *BarParams) WithBody(body *models.APIBarRequest) *BarParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the bar params
-func (o *BarParams) SetBody(body BarBody) {
+func (o *BarParams) SetBody(body *models.APIBarRequest) {
 	o.Body = body
 }
 
@@ -121,8 +123,10 @@ func (o *BarParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry)
 	}
 	var res []error
 
-	if err := r.SetBodyParam(o.Body); err != nil {
-		return err
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
 	}
 
 	if len(res) > 0 {

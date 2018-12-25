@@ -12,6 +12,7 @@ import (
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/AlekSi/grpc-gateway-swagger-issue/api/swagger/client/bar_service"
+	"github.com/AlekSi/grpc-gateway-swagger-issue/api/swagger/client/baz_service"
 )
 
 // Default g RPC gateway swagger issue demo HTTP client.
@@ -59,6 +60,8 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *GRPCGatewa
 
 	cli.BarService = bar_service.New(transport, formats)
 
+	cli.BazService = baz_service.New(transport, formats)
+
 	return cli
 }
 
@@ -105,6 +108,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type GRPCGatewaySwaggerIssueDemo struct {
 	BarService *bar_service.Client
 
+	BazService *baz_service.Client
+
 	Transport runtime.ClientTransport
 }
 
@@ -113,5 +118,7 @@ func (c *GRPCGatewaySwaggerIssueDemo) SetTransport(transport runtime.ClientTrans
 	c.Transport = transport
 
 	c.BarService.SetTransport(transport)
+
+	c.BazService.SetTransport(transport)
 
 }
