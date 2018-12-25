@@ -62,7 +62,7 @@ for the baz operation typically these are written to a http.Request
 type BazParams struct {
 
 	/*Body*/
-	Body interface{}
+	Body BazBody
 
 	timeout    time.Duration
 	Context    context.Context
@@ -103,13 +103,13 @@ func (o *BazParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the baz params
-func (o *BazParams) WithBody(body interface{}) *BazParams {
+func (o *BazParams) WithBody(body BazBody) *BazParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the baz params
-func (o *BazParams) SetBody(body interface{}) {
+func (o *BazParams) SetBody(body BazBody) {
 	o.Body = body
 }
 
@@ -121,10 +121,8 @@ func (o *BazParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry)
 	}
 	var res []error
 
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
+	if err := r.SetBodyParam(o.Body); err != nil {
+		return err
 	}
 
 	if len(res) > 0 {

@@ -17,10 +17,9 @@ all: clean
 			--proto_path=vendor/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 			api/*.proto --swagger_out=logtostderr=true:swagger-tmp
 
-	# --with-flatten=remove-unused
-	swagger flatten --with-flatten=expand swagger-tmp/api/common.swagger.json > api/swagger/common.swagger.json
-	swagger flatten --with-flatten=expand swagger-tmp/api/bar.swagger.json > api/swagger/bar.swagger.json
-	swagger flatten --with-flatten=expand swagger-tmp/api/baz.swagger.json > api/swagger/baz.swagger.json
+	swagger flatten --with-flatten=expand --with-flatten=remove-unused swagger-tmp/api/common.swagger.json > api/swagger/common.swagger.json
+	swagger flatten --with-flatten=expand --with-flatten=remove-unused swagger-tmp/api/bar.swagger.json > api/swagger/bar.swagger.json
+	swagger flatten --with-flatten=expand --with-flatten=remove-unused swagger-tmp/api/baz.swagger.json > api/swagger/baz.swagger.json
 	rm -fr swagger-tmp
 
 	swagger mixin api/swagger/swagger_info.json api/swagger/*.swagger.json > api/swagger/swagger.json

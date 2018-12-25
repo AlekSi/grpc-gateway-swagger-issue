@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/swag"
 
@@ -65,6 +66,65 @@ func (o *BazOK) readResponse(response runtime.ClientResponse, consumer runtime.C
 	return nil
 }
 
+/*BazBody baz body
+swagger:model BazBody
+*/
+type BazBody struct {
+
+	// common
+	Common *BazParamsBodyCommon `json:"common,omitempty"`
+}
+
+// Validate validates this baz body
+func (o *BazBody) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateCommon(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *BazBody) validateCommon(formats strfmt.Registry) error {
+
+	if swag.IsZero(o.Common) { // not required
+		return nil
+	}
+
+	if o.Common != nil {
+		if err := o.Common.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("body" + "." + "common")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *BazBody) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *BazBody) UnmarshalBinary(b []byte) error {
+	var res BazBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
 /*BazOKBody baz o k body
 swagger:model BazOKBody
 */
@@ -90,6 +150,38 @@ func (o *BazOKBody) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (o *BazOKBody) UnmarshalBinary(b []byte) error {
 	var res BazOKBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*BazParamsBodyCommon baz params body common
+swagger:model BazParamsBodyCommon
+*/
+type BazParamsBodyCommon struct {
+
+	// id
+	ID string `json:"id,omitempty"`
+}
+
+// Validate validates this baz params body common
+func (o *BazParamsBodyCommon) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *BazParamsBodyCommon) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *BazParamsBodyCommon) UnmarshalBinary(b []byte) error {
+	var res BazParamsBodyCommon
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

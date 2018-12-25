@@ -63,7 +63,17 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "common": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
             }
           }
         ],
@@ -79,43 +89,6 @@
               }
             }
           }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "apiBarRequest": {
-      "type": "object",
-      "properties": {
-        "common": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "apiBarResponse": {
-      "type": "object"
-    },
-    "apiBazRequest": {
-      "type": "object"
-    },
-    "apiBazResponse": {
-      "type": "object",
-      "properties": {
-        "something": {
-          "type": "string"
-        }
-      }
-    },
-    "apiCommon": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
         }
       }
     }
